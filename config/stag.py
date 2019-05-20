@@ -22,7 +22,7 @@ DATABASES.update(
             'NAME': 'ykf',
             'USER': 'root',
             'PASSWORD': 'Uqv.83WuNm',
-            'HOST': '10.0.1.92',
+            'HOST': '10.0.1.192',
             'PORT': '3306',
         },
     }
