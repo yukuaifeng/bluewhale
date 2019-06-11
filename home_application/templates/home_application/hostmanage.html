@@ -204,8 +204,8 @@
             var post_partition = $("#postpartition").val()
                 
             $.ajax({
-            url:'{{ URL_SITE }}post_data/',
-            type:'get',
+            url:'{{ URL_SITE }}host_data/',
+            type:'post',
             data:{
                 "post_name":post_name,
                 "post_ip":post_ip,
@@ -238,7 +238,7 @@
 
                 // 异步请求后台数据
                 $.ajax({
-                    url: '{{ SITE_URL }}hostdata/',
+                    url: '{{ SITE_URL }}host_data/',
                     type: 'GET',
                     success: function(res){
                         var _html = ' ';

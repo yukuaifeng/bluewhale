@@ -2,6 +2,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from .models import HostModel
+import json
 
 
 # 开发框架中通过中间件默认是需要登录态的，如有不需要登录的，可添加装饰器login_exempt
@@ -31,22 +32,23 @@ def host_data(request):
         host_partition = request.POST.get("host_partition", None)
 
         if "" in [host_name, host_ip, host_os, host_partition]:
-            return render_json({'code' : -1, 'message':'lost someone'})
-        
+            return HttpResponse(json.dumps({'code': -1, 'message': 'lost someone'}))
+
         try:
             HostModel.objects.create(
-                host_name = host_name, host_ip = host_ip, host_os = host_os, host_partition = host_partition)
+                host_name=host_name, host_ip=host_ip, host_os=host_os, host_partition=host_partition)
         except Exception as e:
-            return render_json({'code':-1, 'message':'something wrong'})
-        
-        return render_json({'code':0, 'message':'insert success'})
+            return HttpResponse(json.dumps({'code': -1, 'message': 'something wrong'}))
+
+        return HttpResponse(json.dumps({'code': 0, 'message': 'insert success'}))
     else:
-        return render_json({'code':0, 'items' : HostModel.objects.to_dict(),
-                            'catalogues':{
-                                'hostname':'主机名',
-                                'hostip' : '主机ip',
-                                'hostos' : '主机操作系统',
-                                'hostpartition' : '磁盘分区',
-                                'createtime' : '创建时间'
-                            }})
+        return HttpResponse(json.dumps({'code': 0, 'items': HostModel.objects.get_record(),
+                            'catalogues': {
+                                'hostname': '主机名',
+                                'hostip': '主机ip',
+                                'hostos': '主机操作系统',
+                                'hostpartition': '磁盘分区',
+                                'createtime': '创建时间'
+                            }}))
+
 
