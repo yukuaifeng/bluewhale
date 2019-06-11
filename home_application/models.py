@@ -9,13 +9,13 @@ class HostModelManager(models.Manager):
         try:
             qs = super().get_queryset()
             res_dict = [{
-                'host_name' = item.host_name,
-                'host_ip' = item.host_ip,
-                'host_os' = item.host_os,
-                'host_partition' = item.host_partition,
-                'create_time' = item.create_time
-            }]
-        except Exception,e:
+                'host_name' : item.host_name,
+                'host_ip' : item.host_ip,
+                'host_os' : item.host_os,
+                'host_partition' : item.host_partition,
+                'create_time' : item.create_time
+            } for item in qs]
+        except Exception as e:
             print("获取失败", e)
         return res_dict
 

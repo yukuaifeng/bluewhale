@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.shortcuts import render
 from django.http import HttpResponse
-from models import HostModel
+from .models import HostModel
 
 
 # 开发框架中通过中间件默认是需要登录态的，如有不需要登录的，可添加装饰器login_exempt
@@ -31,7 +31,7 @@ def host_data(request):
         host_partition = request.POST.get("host_partition", None)
 
         if "" in [host_name, host_ip, host_os, host_partition]:
-            return render_json('code':-1, 'message':'lost someone')
+            return render_json({'code' : -1, 'message':'lost someone'})
         
         try:
             HostModel.objects.create(
