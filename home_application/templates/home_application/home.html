@@ -13,5 +13,26 @@
 	<div>
 		<h3>蓝鲸开发框架<small>助力你的自动化</small></h3>
 	</div>
+
+    <div>
+        <form class="form" id="form" method="post">
+            <input class="form-group">
+            <a id="display">Try it!</a>
+            <button class="submit-row" type="submit" id="bt">submit</button>
+        </form>
+    </div>
+    <script>
+       $("#bt").click(function () {
+           $.ajax({
+               type:'POST',
+               url:'http://paas.class.o.qcloud.com:80/test',
+               success:function (data) {
+                   $("#display").val(data)
+               }
+
+
+           })
+       })
+    </script>
 {% endblock %}
 

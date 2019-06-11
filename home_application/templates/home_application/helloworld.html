@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="/static/js/jquery-3.3.1.min.js"></script>
+</head>
+<body>
+
+{#        <form class="form" id="form">  {# method="post" action="/test/" #}
+{#            {% csrf_token %}#}
+{#            <input class="form-group" id="in1">#}
+{#            <a id="display">try it!</a>#}
+{#            <button class="submit-row" type="submit" id="bt">submit</button>#}
+{#        </form>#}
+    <input class="form-group" id="in1">
+    <a id="display" class="display">try it!</a>
+    <button class="submit" type="submit" id="bt">submit</button>
+    <button id="b">test</button>
+    <input class="play">see it</input>
+
+    <script>
+        $("#b").on("click",function () {
+            alert("you pushed it!");
+        })
+        $(".submit").click(function () {
+            alert("success post");
+            var i1 = $("#in1").val()
+           $.ajax({
+             url: "/test/",
+             type: "get",
+             data: {"i1": i1},
+             success: function (arg) {
+                 alert(arg);
+                 // 把返回的结果填充到 id是i3的input框中
+                 $(".display").text(arg)
+             }
+       })
+    })
+
+
+    function DoAjax(){
+     var i1 = $("#in1").val()
+        alert("push")
+     $.ajax({
+       url:'/test/',
+       type:'get',
+       data:{data:i1},
+       success:function(arg){
+           $("#display").val(arg)
+           console.log(arg);
+       },
+       error:function(){
+           console.log('failed')
+       }
+     });
+
+   }
+    </script>
+</body>
+</html>
